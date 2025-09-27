@@ -48,7 +48,12 @@ function levelUp(){
         }
         console.log("Same color")
       }else{
-        h2.innerText = `Game Over! Enter Any Key To Restart The Game.`
+        h2.innerHTML = `Game Over! Your Score Was <b>${level}</b> <br> Press Any Key To Restart The Game.`
+        document.querySelector("body").style.backgroundColor = "red"
+        setTimeout(function(){
+            document.querySelector("body").style.backgroundColor = "white"
+
+        },150)
         reset();
       }
     }
