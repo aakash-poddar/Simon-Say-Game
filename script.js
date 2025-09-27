@@ -25,6 +25,7 @@ function btnFlash(btn){
 }
 
 function levelUp(){
+    userSeq = [];
     level++;
     h2.innerText = `Level ${level}`;
 
@@ -38,12 +39,17 @@ function levelUp(){
     
     }
 
-    function checkAns(){
-        let idx = level-1;
+    function checkAns(idx){
+        
       if(userSeq[idx] === gameSeq[idx]){
+        if(userSeq.length == gameSeq.length){
+            setTimeout(levelUp,1000)
+           
+        }
         console.log("Same color")
       }else{
-        h2.innerText = `Game Over! Enter Any key to restart`
+        h2.innerText = `Game Over! Enter Any Key To Restart The Game.`
+        reset();
       }
     }
 
@@ -53,11 +59,18 @@ function levelUp(){
 
         userColor = btn.getAttribute("id")
         userSeq.push(userColor)
-        checkAns();
+        checkAns(userSeq.length - 1);
 
     }
 
     let allBtns = document.querySelectorAll(".btn");
     for(btn of allBtns){
         btn.addEventListener("click",btnPress)
+    }
+
+    function reset(){
+        started = false;
+        gameSeq = [];
+        userSeq = [];
+        level = 0;
     }
